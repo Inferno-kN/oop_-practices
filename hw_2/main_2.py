@@ -218,5 +218,32 @@ class GeometryUtils:
         return Geron
 
 
+#Задача 8
 
+class Time:
+    def __init__(self, hours: int, minutes: int, seconds: int):
+        self.hours = hours + (minutes // 60) # если задано минут > 60, то присваиваем целое
+        self.minutes = (minutes % 60) + (seconds // 60)
+        self.seconds = seconds % 60
+
+    def __add__(self, other):
+        new_hours = self.hours + other.hours
+        new_minutes = self.minutes + other.minutes
+        new_seconds = self.seconds + other.seconds
+        return new_hours, new_minutes, new_seconds
+
+    def __sub__(self, other):
+        new_hours = self.hours - other.hours
+        new_minutes = self.minutes - other.minutes
+        new_seconds = self.seconds - other.seconds
+        return new_hours, new_minutes, new_seconds
+
+    def __mul__(self, other):
+        new_hours = self.hours * other.hours
+        new_minutes = self.minutes * other.minutes
+        new_seconds = self.seconds * other.seconds
+        return new_hours, new_minutes, new_seconds
+
+    def __str__(self):
+        return f"{(self.hours % 100) // 10}{(self.hours // 1) % 10}:{(self.minutes % 100) // 10}{self.minutes % 10}:{(self.seconds % 100) // 10}{self.seconds % 10}"
 
