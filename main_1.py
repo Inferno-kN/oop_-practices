@@ -1,6 +1,4 @@
 #Задача 1
-from fontTools.cffLib.width import missingdict
-
 
 class Animal:
     def __init__(self, name: str, vid: str, age: int):

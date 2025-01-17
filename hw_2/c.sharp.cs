@@ -16,7 +16,7 @@ class Patient
     void Zapis(string date, string time)
     {
         this.date = date;
-        this.time = time:
+        this.time = time;
     }
     void Info()
     {
@@ -142,3 +142,45 @@ HeightScreen = 1080 //высота экрана, то есть вертикал�
         return ($"Заголовок окна: this.title}, Координаты левого верхнего угла: {this.koord},\nРазмер по горизонтали, Размер по вертикали:{this.gorizont}, {this.vertikal}, Цвет окна: {this.color}, Cостояние видимое/невидимое: {this.visible}, состояние с рамкой/без рамки: {this.frame}");
     }
 }
+
+// Задача 4
+
+class ArrayUtils
+{
+
+    @static
+    void Sum(arr)
+    {
+        return sum(arr)
+    }
+    @static
+    void Multi(int [] arr)
+   {
+        int multi = 1;
+        foreach (int i in arr)
+        {
+            multi *= i
+        }
+        Console.WriteLine(multi);
+   }
+    @static
+    void InverseArr(int [] arr)
+    {
+        Array.Reverse(arr)
+        return Array.Reverse(arr)
+    }
+    @static
+    void MaximumArr(int [] arr)
+    {
+        int max = arr.Max();
+        Console.WriteLine(max);
+    }
+    @static
+    void MinimumArr(int [] arr)
+    {
+        int min = arr.Min();
+        Console.WriteLine(min);
+    }
+}
+
+// Задача 5 ПОНЯТИЯ НЕ ИМЕЮ ДАЖЕ КАК ПИСАТЬ ОСТАЛЬНЫЕ ЗАДАЧКИ НА С#
