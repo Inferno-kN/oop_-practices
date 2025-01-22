@@ -1,7 +1,7 @@
 #Задача 1
 
 class Patient:
-    def __init__(self, fio: str, age: int, zabolev: str):
+    def __init__(self, fio: str, age: int, disease: str):
         self.fio = fio
         self.age = age
         self.disease = disease
@@ -15,7 +15,7 @@ class Patient:
 #Задача 2
 
 class TouristSpot:
-    def __init__(self, place: str, country: str, dostopr: str):
+    def __init__(self, place: str, country: str, sight: str):
         self.place = place
         self.country = country
         self.sight = sight
@@ -44,7 +44,7 @@ class ModelWindow:
 
     def movement_vertikal(self, delta) -> bool:
        new_y = self.koord_y + delta
-        if 0 <= new_y <= ModelWindow.height_screen - self.height:
+       if 0 <= new_y <= ModelWindow.height_screen - self.height:
             self.koord_y = new_y
             print(f"Окно перемещено по вертикали на {delta}, Текущая координата Y: {self.koord_y}")
             return True
