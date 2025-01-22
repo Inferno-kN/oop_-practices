@@ -4,13 +4,13 @@ class Patient:
     def __init__(self, fio: str, age: int, zabolev: str):
         self.fio = fio
         self.age = age
-        self.zabolev = zabolev
+        self.disease = disease
 
     def zapis(self, date: str, time: str):
         print(f"{self.fio}, Вы записаны на приём в дату {date} и время {time}")
 
     def info(self):
-        print(f"ФИО: {self.fio}, Возраст: {self.age}, Текущее заболевание: {self.zabolev}")
+        print(f"ФИО: {self.fio}, Возраст: {self.age}, Текущее заболевание: {self.disease}")
 
 #Задача 2
 
@@ -18,7 +18,7 @@ class TouristSpot:
     def __init__(self, place: str, country: str, dostopr: str):
         self.place = place
         self.country = country
-        self.dostopr = dostopr
+        self.sight = sight
 
     def visit_place(self, name: str):
         print(f"{name}, Вы посетили нас!")
@@ -42,50 +42,64 @@ class ModelWindow:
         self.visible = visible
         self.frame = frame
 
-    def movement_vertikal(self) -> bool:
-        if 0 <= self.vertikal <= ModelWindow.height_screen:
-            print(f"Окно по вертикали {self.vertikal} двигается или находится в состоянии покоя на высоте {ModelWindow.height_screen} экрана")
+    def movement_vertikal(self, delta) -> bool:
+       new_y = self.koord_y + delta
+        if 0 <= new_y <= ModelWindow.height_screen - self.height:
+            self.koord_y = new_y
+            print(f"Окно перемещено по вертикали на {delta}, Текущая координата Y: {self.koord_y}")
             return True
         else:
-            print(f"Окно по вертикали {self.vertikal} не может превышать высоту {ModelWindow.height_screen} экрана")
+            print(f"Перемещение по вертикали на {delta} невозможно. Окно выходит за границы экрана.")
             return False
 
-    def movement_gorizont(self) -> bool:
-        if 0 <= self.gorizont <= ModelWindow.width_screen:
-            print(f"Окно по горизонтали {self.gorizont} двигается или находится в состоянии покоя на ширине {ModelWindow.width_screen} экрана")
+    def move_horizontal(self, delta: int) -> bool:
+        new_x = self.koord_x + delta
+        if 0 <= new_x <= ModelWindow.width_screen - self.width:
+            self.koord_x = new_x
+            print(f"Окно перемещено по горизонтали на {delta}, Текущая координата X: {self.koord_x}")
             return True
         else:
-            print(f"Окно по горизонтали {self.gorizont} не может превышать ширину {ModelWindow.width_screen} экрана")
+            print(f"Перемещение по горизонтали на {delta} невозможно. Окно выходит за границы экрана.")
             return False
 
 
-    def height_change(self, height: int):
-        if 0 <= height <= ModelWindow.height_screen:
-            print(f"Высота изменилась на {height} сантиметров")
+    def change_height(self, new_height: int) -> bool:
+        if 0 <= new_height <= ModelWindow.height_screen:
+            self.height = new_height
+            print(f"Высота окна изменена на {new_height}.")
+            return True
         else:
-            print(f"Отрицательная высота или высота, превышающая высоту экрана невозможна!")
+            print(f"Недопустимая высота: {new_height}. Высота должна быть в пределах от 0 до {ModelWindow.height_screen}.")
+            return False
 
-    def width_change(self, width: int):
-        if 0 <= width <= ModelWindow.width_screen:
-            print(f"Ширина изменилась на {width} сантиметров")
+    def change_width(self, new_width: int) -> bool:
+        if 0 <= new_width <= ModelWindow.width_screen:
+            self.width = new_width
+            print(f"Ширина окна изменена на {new_width}.")
+            return True
         else:
-            print(f"Отрицательная ширина или ширина, превышающая ширину экрана невозможна!")
-
+            print(f"Недопустимая ширина: {new_width}. Ширина должна быть в пределах от 0 до {ModelWindow.width_screen}.")
+            return False
 
     def update_color(self, new_color: str) -> bool:
         if self.color != new_color:
-            print(f"Цвет {self.color} остался без изменений")
-            return False
-        else:
-            print(f"Цвет {self.color} был изменён на {new_color}")
+            old_color = self.color
+            self.color = new_color
+            print(f"Цвет окна изменен с {old_color} на {new_color}.")
             return True
-
-    def update_frame(self, new_frame: str) -> bool:
-        if self.frame != new_frame:
-            print(f"Рамка {self.frame} осталось такой же")
-            return False
         else:
-            print(f"Рамка {self.frame} была изменена на рамку {new_frame}")
+            print(f"Цвет остался без изменений: {self.color}.")
+            return False
+
+    def toggle_visibility(self):
+        self.visible = not self.visible
+        state = "видимое" if self.visible else "невидимое"
+        print(f"Состояние окна изменено на {state}.")
+
+    def toggle_frame(self):
+        self.frame = not self.frame
+        state = "с рамкой" if self.frame else "без рамки"
+        print(f"Состояние рамки изменено на {state}.")
 
     def __str__(self):
         return f"Заголовок окна: {self.title}, Координаты левого верхнего угла: {self.koord},\nРазмер по горизонтали, Размер по вертикали:{self.gorizont}, {self.vertikal}, Цвет окна: {self.color}, Cостояние видимое/невидимое: {self.visible}, состояние с рамкой/без рамки: {self.frame}"
@@ -119,7 +133,7 @@ class ArrayUtils:
     @staticmethod
     def min1(arr):
         min1 = arr[1]
-        if min1 < arr[0]:
+        if min1 > arr[0]:
             min1 = arr[0]
         return min1
 
@@ -132,15 +146,25 @@ class Vector:
         self.z = z
 
     def __add__(self, other):
-        return Vector(self.x + other.x, self.y + other.y, self.z + other.z)
-
+        if isinstance(other, Vector):
+            return Vector(self.x + other.x, self.y + other.y, self.z + other.z)
+            
     def __sub__(self, other):
-        return Vector(self.x - other.x, self.y - other.y, self.z - other.z)
+        if isinstance(other, Vector):
+            return Vector(self.x - other.x, self.y - other.y, self.z - other.z)
+            
+    def __mul__(self, other):
+        if isinstance(other, Vector):
+            return self.x * other.x + self.y * other.y + self.z * other.z # Скалярное произведение
 
-    def __mul__(self, other): #это скалярное произведение, а вот векторное произведение не пойму как сделать
-        return Vector(self.x * other.x, self.y * other.y, self.z * other.z)
+     def cross(self, other): # Векторное произведение
+        if isinstance(other, Vector):
+            new_x = self.y * other.z - self.z * other.y
+            new_y = self.z * other.x - self.x * other.z
+            new_z = self.x * other.y - self.y * other.x
+            return Vector(x_component, y_component, z_component)
 
-    def lenn(self):
+    def length(self):
         return math.sqrt(self.x**2 + self.y**2 + self.z**2)
 
     def __str__(self):
