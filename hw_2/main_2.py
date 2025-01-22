@@ -273,4 +273,8 @@ class Time:
         return new_hours, new_minutes, new_seconds
 
     def __str__(self):
+<<<<<<< HEAD
         return f"{(self.hours % 100) // 10}{(self.hours // 1) % 10}:{(self.minutes % 100) // 10}{self.minutes % 10}:{(self.seconds % 100) // 10}{self.seconds % 10}"
+=======
+        return f"{(self.hours % 100) // 10}{(self.hours // 1) % 10}:{(self.minutes % 100) // 10}{self.minutes % 10}:{(self.seconds % 100) // 10}{self.seconds % 10}"
+>>>>>>> 6319b786b5471c0f15dfb6653f3e63adf0916437
