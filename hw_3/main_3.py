@@ -6,6 +6,19 @@ class Spell:
         self.__spell_type = spell_type
         self.__description = description
 
+
+        if not isinstance(name, str):
+            raise ValueError("NameTypeError")
+        if not isinstance(difficulty, int):
+            raise ValueError("DifficultyTypeError")
+        if not level > -1:
+            raise ValueError("TypeError")
+        if not isinstance(spell_type, str):
+            raise ValueError("SpellTypeTypeError")
+        if not isinstance(description, str):
+            raise ValueError("DescriptionTypeError")
+            
+
     def get_name(self) -> str:
         return self.__name
 
@@ -36,12 +49,24 @@ class Spell:
 
 
 class Wizard:
-    def __init__(self, name: str, house: str, power_level: int, spells: list[Spell], status="Hogwarts"):
+    def __init__(self, name: str, house: str, power_level: int, spells: list[Spell], status: str):
         self.__name = name
         self.__house = house
         self.__power_level = power_level
         self.__spells = spells
         self.__status = status
+
+
+        if not isinstance(name, str):
+            raise ValueError("NameTypeError")
+        if not isinstance(house, str):
+            raise ValueError("HouseTypeError")
+        if not isinstance(power_level, int):
+            raise ValueError("PowerLevelTypeError")
+        if not spells is list[Spell]:
+            raise ValueError("SpellsTypeError")
+        if not isinstance(status, int):
+            raise ValueError("StatusTypeError")
 
     def get_name(self)-> str:
         return self.__name
@@ -99,6 +124,21 @@ class Employee: #position - должность, department - отдел, salary 
         self.__experience = experience
         self.__projects = projects
 
+
+        if not isinstance(name, str):
+            raise ValueError("NameTypeError")
+        if not isinstance(position, str):
+            raise ValueError("PositionTypeError")
+        if not isinstance(department, str):
+            raise ValueError("DepartmentTypeError")
+        if not isinstance(salary, int):
+            raise ValueError("SalaryTypeError")
+        if not isinstance(experience, int):
+            raise ValueError("ExperienceTypeError")
+        if not isinstance(projects, None or list):
+            raise ValueError("TypeError")
+
+    
     def get_name(self) -> str:
         return self.__name
 
@@ -159,6 +199,19 @@ class Robot:
         self.__lvl_battery = lvl_battery
         self.__status = status
 
+        
+        if not isinstance(number, int):
+            raise ValueError("NumberTypeError")
+        if not isinstance(model, str):
+            raise ValueError("ModelTypeError")
+        if not isinstance(current_task, str):
+            raise ValueError("CurrentTaskTypeError")
+        if not isinstance(lvl_battery, int):
+            raise ValueError("BataryTypeError")
+        if not isinstance(status, str):
+            raise ValueError("StatusTypeError")
+
+    
     def get_number(self) -> int:
         return self.__number
 
@@ -207,6 +260,11 @@ class Achievement:
         self.__title = title
         self.__year = year
 
+        if not isinstance(title, str):
+            raise ValueError("TitleTypeError")
+        if not isinstance(year, int):
+            raise ValueError("YearTypeError")
+
     def get_title(self) -> str:
         return self.__title
 
@@ -220,12 +278,23 @@ class Achievement:
         self.__year = year
 
 class Athlete:
-    def __init__(self, name: str, age: int, sport: str, achievements: list[Achievement], status: str="Active"):
+    def __init__(self, name: str, age: int, sport: str, achievements: list[Achievement], status: bool):
         self.__name = name
         self.__age = age
         self.__sport = sport
         self.__achievements = achievements
         self.__status = status
+
+        if not isinstance(name, str):
+            raise ValueError("NameTypeError")
+        if not isinstance(age, int):
+            raise ValueError("AgeTypeError")
+        if not isinstance(sport, str):
+            raise ValueError("SportTypeError")
+        if not isinstance(achievements, list):
+            raise ValueError("AchievementsTypeError")
+        if not isinstance(status, bool):
+            raise ValueError("StatusTypeError")
 
     def get_name(self) -> str:
         return self.__name
@@ -239,8 +308,11 @@ class Athlete:
     def get_achievement(self) -> list[Achievement]:
         return self.__achievements
 
-    def get_status(self) -> str:
-        return self.__status
+    def get_pension(self) -> bool:
+        if self.__pension:
+            return "Да"
+        else:
+            return "Нет"
 
     def set_name(self, name: str):
         self.__name = name
@@ -251,9 +323,7 @@ class Athlete:
     def set_sport(self, sport: str):
         self.__sport = sport
 
-    def set_status(self, status: str):
-        if status not in ["Active", "Retired"]:
-            raise ValueError("Статус должен быть либо 'Active' либо 'Retired'")
+    def set_status(self, status: bool):
         self.__status = status
 
     def add_achievement(self, achievement: Achievement):
