@@ -1,5 +1,9 @@
 #Задача 1
 from __future__ import annotations
+import random
+
+from random import random
+
 
 class Student:
 
@@ -357,3 +361,111 @@ class Dealership:
     def __str__(self):
         return f"Автомобили в наличии: {self.__cars}, Продавцы: {self.__sellers}, Клиенты: {self.__customers}"
 
+# Задача 4
+
+class HogwartsStudent:
+
+    name: str
+    home: str
+    mp: int
+    spells: list[Spell]
+
+    def __init__(self, name: str, home: str, mp: int, spells=None):
+        self.__name = name
+        self.__home = home
+        self.__mp = mp
+        self.__spells = spells
+
+    def get_name(self):
+        return self.__name
+
+    def get_home(self):
+        return self.__home
+
+    def get_mp(self):
+        return self.__mp
+
+    def get_spells(self):
+        return self.__spells
+
+    def set_name(self, name: str):
+        self.__name = name
+
+    def set_home(self, home: str):
+        self.__home = home
+
+    def set_mp(self, value):
+        if self.__mp <= 0:
+            return False
+        else:
+            return True
+
+    def learn_spell(self, spell: Spell):
+        self.__spells.append(spell)
+
+    def cast_spell(self, target: HogwartsStudent):
+        spell = random.choice(self.__spells)
+        if self.__mp > 0:
+            print(f"Студент {self.__name} использует заклинание {spell.name}")
+        else:
+            print(f"Студенту {self.__name} нехватает маны для использования заклинания {spell.name}")
+
+    def __str__(self):
+        return f"Имя: {self.__name}, Факультет: {self.__home}, Мана:{self.__mp}, Заклинания:{self.__spells}"
+
+
+class Spell:
+
+    def __init__(self, title: str, description: str, mana_cost: int):
+        self.__title = title
+        self.__description = description
+        self.__mana_cost = mana_cost
+
+    def get_title(self):
+        return self.__title
+
+    def get_description(self):
+        return self.__description
+
+    def get_mana_cost(self):
+        return self.__mana_cost
+
+    def set_title(self, title: str):
+        self.__title = title
+
+    def set_description(self, description: str):
+        self.__description = description
+
+    def set_mana_cost(self, mana_cost):
+        self.__mana_cost = mana_cost
+
+    def __str__(self):
+        return f"Название заклинания: {self.__title}, Описание: {self.__description}, Количество стоящей маны: {self.__mana_cost}"
+
+class Hogwarts:
+
+    def __init__(self, students=None, spells=None):
+        self.__students = students or []
+        self.__spells = spells or []
+
+    def get_students(self):
+        return self.__students
+
+    def get_spells(self):
+        return self.__spells
+
+    def enroll_student(self, student: HogwartsStudent):
+        self.__students.append(student)
+
+    def teach_spell(self, spell: Spell):
+        self.__spells.append(spell)
+
+    def simulate_duel(self, student1: HogwartsStudent, student2: HogwartsStudent):
+        while student1.mp > 0 and student2.mp > 0:
+            student1.cast_spell(student2)
+            if student2.mp <= 0:
+                print("Победил первый студент")
+                return None
+            student2.cast_spell(student1)
+            if student1.mp <= 0:
+                print("Победил второй студент")
