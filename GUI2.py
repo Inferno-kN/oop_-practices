@@ -32,3 +32,4 @@ btn_submit.pack(pady=5)
 
 
 run.mainloop()
+# готово
